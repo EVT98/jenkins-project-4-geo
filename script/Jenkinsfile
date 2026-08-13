@@ -26,5 +26,11 @@ pipeline {
              sh 'mvn package -DskipTests'
             }
         }
+
+        stage("Push to artifactory") {
+            steps {
+                sh 'curl -uadmin:APf9HA8iGMfnNpDqqWwUJhoFG1 -T "/var/lib/jenkins/workspace/geo/target/bioMedical-0.0.2-SNAPSHOT.jar" "http://ec2-44-220-145-84.compute-1.amazonaws.com:8081/artifactory/geo/geo-v${BUILD_NUMBER}"'
+            }
+        }
     }
 }
